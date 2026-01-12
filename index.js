@@ -44,10 +44,7 @@ module.exports = function() {
                 // check if it is a sass file
                 if (path.extname(filename).toLowerCase() == '.scss') {
                     // we remove the parent file base path from the path we will output
-                    filename = path.normalize(filename);
-                    var base = path.join(path.normalize(file.base), '/');
-
-                    filename = filename.replace(base, '');
+                   	filename = path.relative(path.dirname(file.path), filename);
                     const type = isForward ? '@forward' :'@use';
                     let importPath = `${type} "${slash(filename)}"`;
                     if (isAs) {
